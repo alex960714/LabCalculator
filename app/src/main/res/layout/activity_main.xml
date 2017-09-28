@@ -14,6 +14,175 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.785"
+            app:layout_constraintVertical_bias="0.188"/>
+
+    <Button
+            android:id="@+id/equalBtn"
+            android:text="="
+            android:textSize="30dp"
+            android:layout_width="75dp"
+            android:layout_height="122dp"
+            tools:layout_editor_absoluteY="389dp"
+            tools:layout_editor_absoluteX="310dp" />
+    <TableLayout
+            android:layout_width="310dp"
+            android:layout_height="349dp"
+            tools:layout_editor_absoluteY="205dp"
+            tools:layout_editor_absoluteX="0dp">
+
+        <TableRow>
+
+            <Button
+                    android:id="@+id/backspaceBtn"
+                    android:text="<--"
+                    android:textAlignment="center"
+                    android:textSize="18dp"
+                    android:layout_width="78dp"
+                    android:layout_height="61dp"/>
+
+            <Button
+                    android:id="@+id/gradeBtn"
+                    android:text="^"
+                    android:textSize="18dp"
+                    android:layout_width="78dp"
+                    android:layout_height="61dp"/>
+
+            <Button
+                    android:id="@+id/sqrtBtn"
+                    android:text="√"
+                    android:textSize="18dp"
+                    android:layout_width="78dp"
+                    android:layout_height="61dp"/>
+
+            <Button
+                    android:id="@+id/percentageBtn"
+                    android:text="%"
+                    android:textSize="18dp"
+                    android:layout_width="78dp"
+                    android:layout_height="61dp"/>
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                    android:id="@+id/sevenBtn"
+                    android:text="7"
+                    android:textSize="18dp"
+                    android:layout_width="78dp"
+                    android:layout_height="61dp"/>
+
+            <Button
+                    android:id="@+id/eightBtn"
+                    android:text="8"
+                    android:textSize="18dp"
+                    android:layout_width="78dp"
+                    android:layout_height="61dp"/>
+
+            <Button
+                    android:id="@+id/nineBtn"
+                    android:text="9"
+                    android:textSize="18dp"
+                    android:layout_width="78dp"
+                    android:layout_height="61dp"/>
+
+            <Button
+                    android:id="@+id/sumBtn"
+                    android:text="+"
+                    android:textSize="18dp"
+                    android:layout_width="78dp"
+                    android:layout_height="61dp"/>
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                    android:id="@+id/fourBtn"
+                    android:text="4"
+                    android:textSize="18dp"
+                    android:layout_width="78dp"
+                    android:layout_height="61dp"/>
+
+            <Button
+                    android:id="@+id/fiveBtn"
+                    android:text="5"
+                    android:textSize="18dp"
+                    android:layout_width="78dp"
+                    android:layout_height="61dp"/>
+
+            <Button
+                    android:id="@+id/sixBtn"
+                    android:text="6"
+                    android:textSize="18dp"
+                    android:layout_width="78dp"
+                    android:layout_height="61dp"/>
+
+            <Button
+                    android:id="@+id/diffBtn"
+                    android:text="-"
+                    android:textSize="20dp"
+                    android:layout_width="78dp"
+                    android:layout_height="61dp"/>
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                    android:id="@+id/oneBtn"
+                    android:text="1"
+                    android:textSize="18dp"
+                    android:layout_width="78dp"
+                    android:layout_height="61dp"/>
+            <Button
+                    android:id="@+id/twoBtn"
+                    android:text="2"
+                    android:textSize="18dp"
+                    android:layout_width="78dp"
+                    android:layout_height="61dp"/>
+            <Button
+                    android:id="@+id/threeBtn"
+                    android:text="3"
+                    android:textSize="18dp"
+                    android:layout_width="78dp"
+                    android:layout_height="61dp"/>
+            <Button
+                    android:id="@+id/multBtn"
+                    android:text="*"
+                    android:textSize="20dp"
+                    android:layout_width="78dp"
+                    android:layout_height="61dp"/>
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                    android:id="@+id/zeroBtn"
+                    android:text="0"
+                    android:textSize="18dp"
+                    android:layout_width="78dp"
+                    android:layout_height="61dp"/>
+            <Button
+                    android:id="@+id/pointBtn"
+                    android:text="."
+                    android:textSize="20dp"
+                    android:layout_width="78dp"
+                    android:layout_height="61dp"/>
+            <Button
+                    android:id="@+id/minusBtn"
+                    android:text="( - )"
+                    android:textSize="18dp"
+                    android:layout_width="78dp"
+                    android:layout_height="61dp"/>
+            <Button
+                    android:id="@+id/divBtn"
+                    android:text="/"
+                    android:textSize="18dp"
+                    android:layout_width="78dp"
+                    android:layout_height="61dp"/>
+
+        </TableRow>
+
+    </TableLayout>
+
 
 </android.support.constraint.ConstraintLayout>
