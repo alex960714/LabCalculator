@@ -262,7 +262,7 @@
                     tools:layout_editor_absoluteX="316dp">
 
                 <Button
-                        android:id="@+id/cancel"
+                        android:id="@+id/cancelBtn"
                         android:text="C"
                         android:textSize="18dp"
                         android:layout_width="69dp"
@@ -271,16 +271,16 @@
                         android:textColor="@android:color/white"
                         android:background="@android:color/holo_red_dark"/>
                 <Button
-                        android:id="@+id/sinBtn"
-                        android:text="sin"
+                        android:id="@+id/cancelLastBtn"
+                        android:text="ce"
                         android:textSize="18dp"
                         android:layout_width="69dp"
                         android:layout_height="61dp"
                         android:layout_margin="1dp"
                         android:background="@android:color/darker_gray"/>
                 <Button
-                        android:id="@+id/cosBtn"
-                        android:text="cos"
+                        android:id="@+id/prevBtn"
+                        android:text="prev"
                         android:textSize="18dp"
                         android:layout_width="69dp"
                         android:layout_height="61dp"
