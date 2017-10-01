@@ -5,7 +5,6 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
         tools:context="com.example.user.labcalculator.MainActivity">
 
     <TextView
@@ -13,7 +12,7 @@
             android:gravity="bottom|left"
             android:layout_width="wrap_content"
             android:layout_height="27dp"
-            app:layout_constraintVertical_bias="0.04"
+            app:layout_constraintVertical_bias="0.1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -29,7 +28,7 @@
             android:gravity="top|right"
             android:textSize="70dp"
             android:textColor="@android:color/black"
-            app:layout_constraintVertical_bias="0.00"
+            app:layout_constraintVertical_bias="0.0"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -37,16 +36,15 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_constraintRight_creator="1" tools:layout_constraintLeft_creator="1"
             android:id="@+id/currNumTextView"
-            tools:layout_editor_absoluteX="551dp"/>
+    />
 
 
     <LinearLayout
             android:orientation="horizontal"
             android:layout_height="wrap_content"
-            android:layout_width="591dp"
+            android:layout_width="590dp"
             tools:layout_constraintLeft_creator="1"
 
-            android:layout_marginTop="29dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
 
@@ -58,7 +56,7 @@
 
                 <Button
                         android:id="@+id/backspaceBtn"
-                        android:text="<--"
+                        android:text="--"
                         android:textAlignment="center"
                         android:textSize="18dp"
                         android:textColor="@android:color/white"
