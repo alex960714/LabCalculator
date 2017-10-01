@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private Button cancelBtn;
     private Button cancelLastBtn;
     private Button memoryBtn;
-    private List<Double> memory;
+    private double memory;
 
     private TextView currNum;
     private TextView currRes;
@@ -182,66 +182,196 @@ public class MainActivity extends AppCompatActivity {
         sumBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                opChar.setText("+");
-                if(lastOp.equals("=")) {
-                    currRes.setText(currNum.getText());
-                    currNum.setText("0");
-                    pointFlag = false;
-                }
-                else if (lastOp.equals("number")) {
+                if(lastOp.equals("=") || lastOp.equals("number")) {
                     prevOperationHandler("+");
                 }
-                lastOp = "+";
+                else if (lastOp.equals("error") || lastOp.equals("minus") || lastOp.equals("point")) {}
+                else {
+                    opChar.setText("+");
+                    lastOp = "+";
+                }
             }
         });
 
         diffBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                opChar.setText("-");
                 if(lastOp.equals("=") || lastOp.equals("number")) {
-                    currRes.setText(currNum.getText());
-                    currNum.setText("0");
-                    pointFlag = false;
+                    prevOperationHandler("-");
                 }
-                lastOp = "-";
+                else if (lastOp.equals("error") || lastOp.equals("minus") || lastOp.equals("point")) {}
+                else {
+                    opChar.setText("-");
+                    lastOp = "-";
+                }
             }
         });
 
         multBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                opChar.setText("*");
                 if(lastOp.equals("=") || lastOp.equals("number")) {
-                    currRes.setText(currNum.getText());
-                    currNum.setText("0");
-                    pointFlag = false;
+                    prevOperationHandler("*");
                 }
-                lastOp = "*";
+                else if (lastOp.equals("error") || lastOp.equals("minus") || lastOp.equals("point")) {}
+                else {
+                    opChar.setText("*");
+                    lastOp = "*";
+                }
             }
         });
 
         divBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                opChar.setText("/");
                 if(lastOp.equals("=") || lastOp.equals("number")) {
-                    currRes.setText(currNum.getText());
-                    currNum.setText("0");
-                    pointFlag = false;
+                    prevOperationHandler("/");
                 }
-                lastOp = "/";
+                else if (lastOp.equals("error") || lastOp.equals("minus") || lastOp.equals("point")) {}
+                else {
+                    opChar.setText("/");
+                    lastOp = "/";
+                }
             }
         });
+
+        gradeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(lastOp.equals("=") || lastOp.equals("number")) {
+                    prevOperationHandler("^");
+                }
+                else if (lastOp.equals("error") || lastOp.equals("minus") || lastOp.equals("point")) {}
+                else {
+                    opChar.setText("^");
+                    lastOp = "^";
+                }
+            }
+        });
+
+        percBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(lastOp.equals("=") || lastOp.equals("number")) {
+                    prevOperationHandler("%");
+                }
+                else if (lastOp.equals("error") || lastOp.equals("minus") || lastOp.equals("point")) {}
+                else {
+                    opChar.setText("%");
+                    lastOp = "%";
+                }
+            }
+        });
+
         sqrtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                currNum.setText(String.valueOf(Math.sqrt(
-                        Double.parseDouble(currRes.getText().toString()))));
+                Double operand = Double.parseDouble(currNum.getText().toString());
+                if(operand >= 0) {
+                    currNum.setText(String.valueOf(Math.sqrt(operand)));
+                }
+                else {
+
+                    currRes.setText("");
+                    currNum.setText("error: negative operand");
+                    opChar.setText("=");
+                    lastOp="error";
+                }
+                pointFlag=false;
+            }
+        });
+
+        minusBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!lastOp.equals("number") && !lastOp.equals("point")) {
+                    currNum.setText("-");
+                    lastOp="minus";
+                }
+            }
+        });
+
+        pointBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!pointFlag) {
+                    if(lastOp.equals("number")) {
+                        currNum.setText(currNum.getText() + ".");
+                    }
+                    else if(lastOp.equals("=") || lastOp.equals("error")){
+                        currNum.setText("0.");
+                    }
+                    else if(lastOp.equals("minus")){
+                        currNum.setText("-0.");
+                    }
+                    pointFlag=true;
+                    lastOp="point";
+                }
+            }
+        });
+
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 currRes.setText("");
+                currNum.setText("0");
                 opChar.setText("=");
                 lastOp="=";
-                pointFlag=false;
+            }
+        });
+
+        cancelLastBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currNum.setText("0");
+                lastOp=opChar.getText().toString();
+            }
+        });
+
+        backspaceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!currNum.equals("0")) {
+                    String tmpCurrNum=currNum.getText().toString();
+                    if(tmpCurrNum.length() == 1){
+                        currNum.setText("0");
+                        lastOp=opChar.getText().toString();
+                    }
+                    else {
+                        if(lastOp=="point"){
+                            pointFlag=false;
+                        }
+                        currNum.setText(tmpCurrNum.substring(0,tmpCurrNum.length() - 1));
+                        char lastSymbol = tmpCurrNum.toCharArray()[tmpCurrNum.length() - 2];
+                        if(lastSymbol == '.'){
+                            lastOp="point";
+                        }
+                        else if (lastSymbol == '-'){
+                            lastOp="minus";
+                        }
+                    }
+                }
+            }
+        });
+
+        memoryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currNum.setText(String.valueOf(memory));
+            }
+        });
+
+        eqBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!lastOp.equals("minus") && !lastOp.equals("point")) {
+                    prevOperationHandler("=");
+                    if (lastOp != "error") {
+                        currNum.setText(currRes.getText().toString());
+                        currRes.setText("");
+                        memory = Double.parseDouble(currNum.getText().toString());
+                    }
+                }
             }
         });
     }
