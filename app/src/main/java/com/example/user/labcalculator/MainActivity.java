@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     private Button pointBtn;
     private boolean pointFlag;
     private Button minusBtn;
-    private boolean isNegative;
 
     private Button sumBtn;
     private Button diffBtn;
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private Button gradeBtn;
     private Button sqrtBtn;
     private Button eqBtn;
-    private String lastOp;
+    private String lastOp = "=";
 
     private Button backspaceBtn;
     private Button cancelBtn;
@@ -50,8 +49,42 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getViewsId();
         numberClickListener();
         operationListener();
+    }
+
+    private void getViewsId(){
+        zeroBtn=(Button)findViewById(R.id.zeroBtn);
+        oneBtn=(Button)findViewById(R.id.oneBtn);
+        twoBtn=(Button)findViewById(R.id.twoBtn);
+        threeBtn=(Button)findViewById(R.id.threeBtn);
+        fourBtn=(Button)findViewById(R.id.fourBtn);
+        fiveBtn=(Button)findViewById(R.id.fiveBtn);
+        sixBtn=(Button)findViewById(R.id.sixBtn);
+        sevenBtn=(Button)findViewById(R.id.sevenBtn);
+        eightBtn=(Button)findViewById(R.id.eightBtn);
+        nineBtn=(Button)findViewById(R.id.nineBtn);
+        pointBtn=(Button)findViewById(R.id.pointBtn);
+        minusBtn=(Button)findViewById(R.id.minusBtn);
+
+        sumBtn=(Button)findViewById(R.id.sumBtn);
+        diffBtn=(Button)findViewById(R.id.diffBtn);
+        multBtn=(Button)findViewById(R.id.multBtn);
+        divBtn=(Button)findViewById(R.id.divBtn);
+        percBtn=(Button)findViewById(R.id.percentageBtn);
+        gradeBtn=(Button)findViewById(R.id.gradeBtn);
+        sqrtBtn=(Button)findViewById(R.id.sqrtBtn);
+        eqBtn=(Button)findViewById(R.id.equalBtn);
+
+        backspaceBtn=(Button)findViewById(R.id.backspaceBtn);
+        cancelBtn=(Button)findViewById(R.id.cancelBtn);
+        cancelLastBtn=(Button)findViewById(R.id.cancelLastBtn);
+        memoryBtn=(Button)findViewById(R.id.prevBtn);
+
+        currNum=(TextView)findViewById(R.id.currNumTextView);
+        currRes=(TextView)findViewById(R.id.currResTextView);
+        opChar=(TextView)findViewById(R.id.operationCharView);
     }
 
     private void numberClickListener() {
