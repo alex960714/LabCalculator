@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
       TODO: issue 5: layouts are adapted for 720x1280 screen only: 4 - low  Status: partially fixed
       issue 6: percentage operation works incorrect: fixed
       issue 7: error messages should be deleted by one backspace click (app is crashing): fixed
-      TODO: issue 8: app crashes if minus and sqrt was touched: 2 - high
+      issue 8: app crashes if minus and sqrt was touched: fixed
      */
 
 
@@ -317,18 +317,19 @@ public class MainActivity extends AppCompatActivity {
         sqrtBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Double operand = Double.parseDouble(currNum.getText().toString());
-                if(operand >= 0) {
-                    currNum.setText(String.valueOf(Math.sqrt(operand)));
+                if (!lastOp.equals("minus") && !lastOp.equals("error")) {
+                    Double operand = Double.parseDouble(currNum.getText().toString());
+                    if (operand >= 0) {
+                        currNum.setText(String.valueOf(Math.sqrt(operand)));
+                    }
+                    else {
+                        currRes.setText("");
+                        currNum.setText("error: negative operand");
+                        opChar.setText("=");
+                        lastOp = "error";
+                    }
+                    pointFlag = false;
                 }
-                else {
-
-                    currRes.setText("");
-                    currNum.setText("error: negative operand");
-                    opChar.setText("=");
-                    lastOp="error";
-                }
-                pointFlag=false;
             }
         });
 
