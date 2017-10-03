@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView opChar;
 
     /*issue 1: unable to perform any binary operation on floating numbers: fixed
-      TODO: issue 2: first 0 is not hiding during putting number on intermediate operations: 3 - medium
+      issue 2: first 0 is not hiding during putting number on intermediate operations: fixed
       issue 3: unable to calculate current result (third and later operations are unable): fixed
       issue 4: layouts displacement on very long current operand numbers: fixed
       TODO: issue 5: layouts are adapted for 720x1280 screen only: 4 - low  Status: partially fixed
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         zeroBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!lastOp.equals("=") && !lastOp.equals("error")) {
+                if(lastOp.equals("number") || lastOp.equals("point") || currNum.equals("number")) {
                     if (!currNum.equals("0")) {
                         currNum.setText(currNum.getText() + "0");
                         lastOp="number";
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         oneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!lastOp.equals("=")&& !lastOp.equals("error") && !currNum.equals("0")) {
+                if(lastOp.equals("number") || lastOp.equals("point") || currNum.equals("number")) {
                     currNum.setText(currNum.getText() + "1");
                     lastOp="number";
                 }
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
         twoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!lastOp.equals("=")&& !lastOp.equals("error")&& !currNum.equals("0")) {
+                if(lastOp.equals("number") || lastOp.equals("point") || currNum.equals("number")) {
                     currNum.setText(currNum.getText() + "2");
                     lastOp="number";
                 }
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
         threeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!lastOp.equals("=")&& !lastOp.equals("error")&& !currNum.equals("0")) {
+                if(lastOp.equals("number") || lastOp.equals("point") || currNum.equals("number")) {
                     currNum.setText(currNum.getText() + "3");
                     lastOp="number";
                 }
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         fourBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!lastOp.equals("=")&& !lastOp.equals("error")&& !currNum.equals("0")) {
+                if(lastOp.equals("number") || lastOp.equals("point") || currNum.equals("number")) {
                     currNum.setText(currNum.getText() + "4");
                     lastOp="number";
                 }
@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
         fiveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!lastOp.equals("=")&& !lastOp.equals("error")&& !currNum.equals("0")) {
+                if(lastOp.equals("number") || lastOp.equals("point") || currNum.equals("number")) {
                     currNum.setText(currNum.getText() + "5");
                     lastOp="number";
                 }
@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
         sixBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!lastOp.equals("=")&& !lastOp.equals("error")&& !currNum.equals("0")) {
+                if(lastOp.equals("number") || lastOp.equals("point") || currNum.equals("number")) {
                     currNum.setText(currNum.getText() + "6");
                     lastOp="number";
                 }
@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
         sevenBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!lastOp.equals("=")&& !lastOp.equals("error")&& !currNum.equals("0")) {
+                if(lastOp.equals("number") || lastOp.equals("point") || currNum.equals("number")) {
                     currNum.setText(currNum.getText() + "7");
                     lastOp="number";
                 }
@@ -208,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
         eightBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!lastOp.equals("=")&& !lastOp.equals("error")&& !currNum.equals("0")) {
+                if(lastOp.equals("number") || lastOp.equals("point") || currNum.equals("number")) {
                     currNum.setText(currNum.getText() + "8");
                     lastOp="number";
                 }
@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
         nineBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!lastOp.equals("=")&& !lastOp.equals("error")&& !currNum.equals("0")) {
+                if(lastOp.equals("number") || lastOp.equals("point") || currNum.equals("number")) {
                     currNum.setText(currNum.getText() + "9");
                     lastOp="number";
                 }
@@ -350,11 +350,11 @@ public class MainActivity extends AppCompatActivity {
                     if(lastOp.equals("number")) {
                         currNum.setText(currNum.getText() + ".");
                     }
-                    else if(lastOp.equals("=") || lastOp.equals("error")){
-                        currNum.setText("0.");
-                    }
                     else if(lastOp.equals("minus")){
                         currNum.setText("-0.");
+                    }
+                    else {
+                        currNum.setText("0.");
                     }
                     pointFlag=true;
                     lastOp="point";
@@ -400,6 +400,9 @@ public class MainActivity extends AppCompatActivity {
                         }
                         else if (lastSymbol == '-'){
                             lastOp="minus";
+                        }
+                        else if (currNum.getText().equals("0")) {
+                            lastOp=opChar.getText().toString();
                         }
                     }
                 }
@@ -457,9 +460,10 @@ public class MainActivity extends AppCompatActivity {
                  currNum.setText("0");
                  break;
              case "/":
-                 if(!currNum.getText().equals("0")) {
-                     currRes.setText(String.valueOf(Double.parseDouble(currRes.getText().toString())
-                             /Double.parseDouble(currNum.getText().toString())));
+                 String divRes = String.valueOf(Double.parseDouble(currRes.getText().toString())
+                         /Double.parseDouble(currNum.getText().toString()));
+                 if(!divRes.equals("Infinity")) {
+                     currRes.setText(divRes);
                      currNum.setText("0");
                  }
                  else {
@@ -476,8 +480,10 @@ public class MainActivity extends AppCompatActivity {
                  pointFlag=false;
                  break;
          }
-         opChar.setText(oper);
-         pointFlag=false;
+         if (!lastOp.equals("error")) {
+             opChar.setText(oper);
+         }
+        pointFlag = false;
     }
 
 }
