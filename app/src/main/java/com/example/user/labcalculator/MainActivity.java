@@ -44,11 +44,12 @@ public class MainActivity extends AppCompatActivity {
     private TextView currRes;
     private TextView opChar;
 
-    /*TODO: issue 1: unable to perform any binary operation on floating numbers: 2 - high
+    /*TODO: issue 1: unable to perform any binary operation on floating numbers: fixed
       TODO: issue 2: first 0 is not hiding during putting number on intermediate operations: 3 - medium
-      TODO: issue 3: unable to calculate current result (third and later operations are unable): 2 - high
+      TODO: issue 3: unable to calculate current result (third and later operations are unable): fixed
       TODO: issue 4: layouts displacement on very long current operand numbers: 2 - high
       TODO: issue 5: layouts are adapted for 720x1280 screen only: 3 - medium
+      TODO: issue 6: percentage operation works incorrect: 2 - high
      */
 
 
@@ -102,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 if (!lastOp.equals("=") && !lastOp.equals("error")) {
                     if (!currNum.equals("0")) {
                         currNum.setText(currNum.getText() + "0");
+                        lastOp="number";
                     }
                 }
                 else {
@@ -115,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(!lastOp.equals("=")&& !lastOp.equals("error") && !currNum.equals("0")) {
                     currNum.setText(currNum.getText() + "1");
+                    lastOp="number";
                 }
                 else{
                     currNumReload("1");
@@ -127,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(!lastOp.equals("=")&& !lastOp.equals("error")&& !currNum.equals("0")) {
                     currNum.setText(currNum.getText() + "2");
+                    lastOp="number";
                 }
                 else{
                     currNumReload("2");
@@ -139,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(!lastOp.equals("=")&& !lastOp.equals("error")&& !currNum.equals("0")) {
                     currNum.setText(currNum.getText() + "3");
+                    lastOp="number";
                 }
                 else{
                     currNumReload("3");
@@ -151,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(!lastOp.equals("=")&& !lastOp.equals("error")&& !currNum.equals("0")) {
                     currNum.setText(currNum.getText() + "4");
+                    lastOp="number";
                 }
                 else{
                     currNumReload("4");
@@ -163,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(!lastOp.equals("=")&& !lastOp.equals("error")&& !currNum.equals("0")) {
                     currNum.setText(currNum.getText() + "5");
+                    lastOp="number";
                 }
                 else{
                     currNumReload("5");
@@ -175,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(!lastOp.equals("=")&& !lastOp.equals("error")&& !currNum.equals("0")) {
                     currNum.setText(currNum.getText() + "6");
+                    lastOp="number";
                 }
                 else{
                     currNumReload("6");
@@ -187,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(!lastOp.equals("=")&& !lastOp.equals("error")&& !currNum.equals("0")) {
                     currNum.setText(currNum.getText() + "7");
+                    lastOp="number";
                 }
                 else{
                     currNumReload("7");
@@ -199,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(!lastOp.equals("=")&& !lastOp.equals("error")&& !currNum.equals("0")) {
                     currNum.setText(currNum.getText() + "8");
+                    lastOp="number";
                 }
                 else{
                     currNumReload("8");
@@ -211,6 +221,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(!lastOp.equals("=")&& !lastOp.equals("error")&& !currNum.equals("0")) {
                     currNum.setText(currNum.getText() + "9");
+                    lastOp="number";
                 }
                 else{
                     currNumReload("9");
