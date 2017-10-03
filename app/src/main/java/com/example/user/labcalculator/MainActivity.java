@@ -44,13 +44,14 @@ public class MainActivity extends AppCompatActivity {
     private TextView currRes;
     private TextView opChar;
 
-    /*TODO: issue 1: unable to perform any binary operation on floating numbers: fixed
+    /*issue 1: unable to perform any binary operation on floating numbers: fixed
       TODO: issue 2: first 0 is not hiding during putting number on intermediate operations: 3 - medium
-      TODO: issue 3: unable to calculate current result (third and later operations are unable): fixed
-      TODO: issue 4: layouts displacement on very long current operand numbers: fixed
+      issue 3: unable to calculate current result (third and later operations are unable): fixed
+      issue 4: layouts displacement on very long current operand numbers: fixed
       TODO: issue 5: layouts are adapted for 720x1280 screen only: 4 - low  Status: partially fixed
-      TODO: issue 6: percentage operation works incorrect: fixed
-      TODO: issue 7: error messages should be deleted by one backspace click (app is crashing): 2 - high
+      issue 6: percentage operation works incorrect: fixed
+      issue 7: error messages should be deleted by one backspace click (app is crashing): fixed
+      TODO: issue 8: app crashes if minus and sqrt was touched: 2 - high
      */
 
 
@@ -383,7 +384,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(!currNum.equals("0")) {
                     String tmpCurrNum=currNum.getText().toString();
-                    if(tmpCurrNum.length() == 1){
+                    if(tmpCurrNum.length() == 1 || lastOp.equals("error")){
                         currNum.setText("0");
                         lastOp=opChar.getText().toString();
                     }
