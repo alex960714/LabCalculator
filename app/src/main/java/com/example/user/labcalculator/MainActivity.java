@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.util.Log;
 
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,17 +43,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView currNum;
     private TextView currRes;
     private TextView opChar;
-
-    /*issue 1: unable to perform any binary operation on floating numbers: fixed
-      issue 2: first 0 is not hiding during putting number on intermediate operations: fixed
-      issue 3: unable to calculate current result (third and later operations are unable): fixed
-      issue 4: layouts displacement on very long current operand numbers: fixed
-      TODO: issue 5: layouts are adapted for 720x1280 screen only: 4 - low  Status: partially fixed
-      issue 6: percentage operation works incorrect: fixed
-      issue 7: error messages should be deleted by one backspace click (app is crashing): fixed
-      issue 8: app crashes if minus and sqrt was touched: fixed
-     */
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -484,6 +473,26 @@ public class MainActivity extends AppCompatActivity {
              opChar.setText(oper);
          }
         pointFlag = false;
+    }
+
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("currNum",currNum.getText().toString());
+        outState.putString("opChar",opChar.getText().toString());
+        outState.putString("currRes",currRes.getText().toString());
+        outState.putString("lastOp",lastOp);
+        outState.putDouble("memory",memory);
+        Log.d("recoveryLog", "onSaveInstanceState");
+    }
+
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        currRes.setText(savedInstanceState.getString("currRes"));
+        opChar.setText(savedInstanceState.getString("opChar"));
+        currNum.setText(savedInstanceState.getString("currNum"));
+        lastOp=savedInstanceState.getString("lastOp");
+        memory=savedInstanceState.getDouble("memory");
+        Log.d("recoveryLog", "onRestoreInstanceState");
     }
 
 }
