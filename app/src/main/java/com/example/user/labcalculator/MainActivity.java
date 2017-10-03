@@ -7,6 +7,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.util.Log;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView currNum;
     private TextView currRes;
     private TextView opChar;
+
+    private Pattern ansPattern = Pattern.compile("^([-]?[0-9]+[.]0)$");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -381,6 +386,7 @@ public class MainActivity extends AppCompatActivity {
                     else {
                         if(lastOp=="point"){
                             pointFlag=false;
+                            lastOp="number";
                         }
                         currNum.setText(tmpCurrNum.substring(0,tmpCurrNum.length() - 1));
                         char lastSymbol = tmpCurrNum.toCharArray()[tmpCurrNum.length() - 2];
@@ -410,8 +416,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(!lastOp.equals("minus") && !lastOp.equals("point")) {
                     prevOperationHandler("=");
-                    if (lastOp != "error") {
-                        currNum.setText(currRes.getText().toString());
+                    if (!lastOp.equals("error")) {
+                        String tmpRes = currRes.getText().toString();
+                        Matcher ansMatcher = ansPattern.matcher(tmpRes);
+                        if (ansMatcher.matches()){
+                            currNum.setText(tmpRes.substring(0, tmpRes.length() - 2));
+                        }
+                        else {
+                            currNum.setText(currRes.getText().toString());
+                        }
                         currRes.setText("");
                         memory = Double.parseDouble(currNum.getText().toString());
                     }
