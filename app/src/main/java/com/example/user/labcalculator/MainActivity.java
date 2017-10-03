@@ -47,9 +47,10 @@ public class MainActivity extends AppCompatActivity {
     /*TODO: issue 1: unable to perform any binary operation on floating numbers: fixed
       TODO: issue 2: first 0 is not hiding during putting number on intermediate operations: 3 - medium
       TODO: issue 3: unable to calculate current result (third and later operations are unable): fixed
-      TODO: issue 4: layouts displacement on very long current operand numbers: 2 - high
-      TODO: issue 5: layouts are adapted for 720x1280 screen only: 3 - medium
-      TODO: issue 6: percentage operation works incorrect: 2 - high
+      TODO: issue 4: layouts displacement on very long current operand numbers: fixed
+      TODO: issue 5: layouts are adapted for 720x1280 screen only: 4 - low  Status: partially fixed
+      TODO: issue 6: percentage operation works incorrect: fixed
+      TODO: issue 7: error messages should be deleted by one backspace click (app is crashing): 2 - high
      */
 
 
@@ -304,13 +305,10 @@ public class MainActivity extends AppCompatActivity {
         percBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(lastOp.equals("=") || lastOp.equals("number")) {
-                    prevOperationHandler("%");
-                }
-                else if (lastOp.equals("error") || lastOp.equals("minus") || lastOp.equals("point")) {}
-                else {
-                    opChar.setText("%");
-                    lastOp = "%";
+                if(!lastOp.equals("=") && !lastOp.equals("error") && !lastOp.equals("minus")
+                        && !lastOp.equals("point")) {
+                    currNum.setText(String.valueOf(Double.parseDouble(currRes.getText().toString())
+                            *Double.parseDouble(currNum.getText().toString())/100));
                 }
             }
         });
@@ -474,11 +472,6 @@ public class MainActivity extends AppCompatActivity {
                          Double.parseDouble(currNum.getText().toString()))));
                  currNum.setText("0");
                  pointFlag=false;
-                 break;
-             case "%":
-                 currRes.setText(String.valueOf(Double.parseDouble(currRes.getText().toString())
-                         %Double.parseDouble(currNum.getText().toString())));
-                 currNum.setText("0");
                  break;
          }
          opChar.setText(oper);
