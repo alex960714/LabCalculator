@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private Button eightBtn;
     private Button nineBtn;
     private Button pointBtn;
-    private boolean pointFlag;
+    private boolean pointFlag;    //float number flag
     private Button minusBtn;
 
     private Button sumBtn;
@@ -35,19 +35,19 @@ public class MainActivity extends AppCompatActivity {
     private Button gradeBtn;
     private Button sqrtBtn;
     private Button eqBtn;
-    private String lastOp = "=";
+    private String lastOp = "=";    //app status (+, -, *, /, ^, =, number, minus, point, error)
 
     private Button backspaceBtn;
     private Button cancelBtn;
     private Button cancelLastBtn;
     private Button memoryBtn;
-    private double memory;
+    private double memory;    //last answer
 
     private TextView currNum;
     private TextView currRes;
     private TextView opChar;
 
-    private Pattern ansPattern = Pattern.compile("^([-]?[0-9]+[.]0)$");
+    private Pattern ansPattern = Pattern.compile("^([-]?[0-9]+[.]0)$");    //regular expression of #.0 numbers
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -414,7 +414,7 @@ public class MainActivity extends AppCompatActivity {
         eqBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!lastOp.equals("minus") && !lastOp.equals("point")) {
+                if(!lastOp.equals("minus") && !lastOp.equals("point") && !lastOp.equals("error")) {
                     prevOperationHandler("=");
                     if (!lastOp.equals("error")) {
                         String tmpRes = currRes.getText().toString();
