@@ -300,8 +300,7 @@ public class MainActivity extends AppCompatActivity {
         percBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!lastOp.equals("=") && !lastOp.equals("error") && !lastOp.equals("minus")
-                        && !lastOp.equals("point")) {
+                if(!currRes.getText().toString().equals("") && !lastOp.equals("minus") && !lastOp.equals("point")) {
                     currNum.setText(String.valueOf(Double.parseDouble(currRes.getText().toString())
                             *Double.parseDouble(currNum.getText().toString())/100));
                 }
@@ -318,7 +317,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else {
                         currRes.setText("");
-                        currNum.setText("error: negative operand");
+                        currNum.setText("error");
                         opChar.setText("=");
                         lastOp = "error";
                     }
@@ -379,7 +378,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(!currNum.equals("0")) {
                     String tmpCurrNum=currNum.getText().toString();
-                    if(tmpCurrNum.length() == 1 || lastOp.equals("error")){
+                    if(tmpCurrNum.length() == 1 || lastOp.equals("error") || currNum.getText().toString().equals("Infinity")
+                            || currNum.getText().toString().equals("NaN")){
                         currNum.setText("0");
                         lastOp=opChar.getText().toString();
                     }
@@ -407,7 +407,15 @@ public class MainActivity extends AppCompatActivity {
         memoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                currNum.setText(String.valueOf(memory));
+                if(Math.abs(memory-Math.round(memory))>1e-10) {
+                    pointFlag = true;
+                    currNum.setText(String.valueOf(memory));
+                }
+                else {
+                    pointFlag = false;
+                    currNum.setText(String.valueOf(Math.round(memory)));
+                }
+                lastOp="number";
             }
         });
 
@@ -464,16 +472,16 @@ public class MainActivity extends AppCompatActivity {
              case "/":
                  String divRes = String.valueOf(Double.parseDouble(currRes.getText().toString())
                          /Double.parseDouble(currNum.getText().toString()));
-                 if(!divRes.equals("Infinity")) {
+                 //if(!divRes.equals("Infinity") && !divRes.equals("NaN")) {
                      currRes.setText(divRes);
                      currNum.setText("0");
-                 }
+                 /*}
                  else {
                      currRes.setText("");
                      currNum.setText("error: dividing by 0");
                      opChar.setText("=");
                      lastOp="error";
-                 }
+                 }*/
                  break;
              case "^":
                  currRes.setText(String.valueOf(Math.pow(Double.parseDouble(currRes.getText().toString()),
