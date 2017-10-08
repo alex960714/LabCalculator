@@ -415,7 +415,9 @@ public class MainActivity extends AppCompatActivity {
                     pointFlag = false;
                     currNum.setText(String.valueOf(Math.round(memory)));
                 }
-                lastOp="number";
+                if(Math.abs(memory)>1e-10) {
+                    lastOp = "number";
+                }
             }
         });
 
