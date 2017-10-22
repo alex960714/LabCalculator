@@ -7,22 +7,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button zeroBtn;
-    private Button oneBtn;
-    private Button twoBtn;
-    private Button threeBtn;
-    private Button fourBtn;
-    private Button fiveBtn;
-    private Button sixBtn;
-    private Button sevenBtn;
-    private Button eightBtn;
-    private Button nineBtn;
+    private List<Button> numBtn = new ArrayList<>();
     private Button pointBtn;
     private boolean pointFlag;    //float number flag
     private Button minusBtn;
@@ -60,16 +53,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getViewsId(){
-        zeroBtn=(Button)findViewById(R.id.zeroBtn);
-        oneBtn=(Button)findViewById(R.id.oneBtn);
-        twoBtn=(Button)findViewById(R.id.twoBtn);
-        threeBtn=(Button)findViewById(R.id.threeBtn);
-        fourBtn=(Button)findViewById(R.id.fourBtn);
-        fiveBtn=(Button)findViewById(R.id.fiveBtn);
-        sixBtn=(Button)findViewById(R.id.sixBtn);
-        sevenBtn=(Button)findViewById(R.id.sevenBtn);
-        eightBtn=(Button)findViewById(R.id.eightBtn);
-        nineBtn=(Button)findViewById(R.id.nineBtn);
+        numBtn.add((Button)findViewById(R.id.zeroBtn));
+        numBtn.add((Button)findViewById(R.id.oneBtn));
+        numBtn.add((Button)findViewById(R.id.twoBtn));
+        numBtn.add((Button)findViewById(R.id.threeBtn));
+        numBtn.add((Button)findViewById(R.id.fourBtn));
+        numBtn.add((Button)findViewById(R.id.fiveBtn));
+        numBtn.add((Button)findViewById(R.id.sixBtn));
+        numBtn.add((Button)findViewById(R.id.sevenBtn));
+        numBtn.add((Button)findViewById(R.id.eightBtn));
+        numBtn.add((Button)findViewById(R.id.nineBtn));
+
         pointBtn=(Button)findViewById(R.id.pointBtn);
         minusBtn=(Button)findViewById(R.id.minusBtn);
 
@@ -93,137 +87,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void numberClickListener() {
-        zeroBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(lastOp.equals("number") || lastOp.equals("point") || lastOp.equals("minus")) {
-                    if (!currNum.equals("0")) {
-                        currNum.setText(currNum.getText() + "0");
+        for(Integer i=0;i<numBtn.size();i++){
+            final String currBtn = i.toString();
+            numBtn.get(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(!currNum.getText().equals("0") &&
+                            (lastOp.equals("number") || lastOp.equals("point") || lastOp.equals("minus"))) {
+                        currNum.setText(currNum.getText() + currBtn);
                         lastOp="number";
                     }
+                    else{
+                        currNumReload(currBtn);
+                    }
                 }
-                else {
-                    currNumReload("0");
-                }
-            }
-        });
-
-        oneBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(lastOp.equals("number") || lastOp.equals("point") || lastOp.equals("minus")) {
-                    currNum.setText(currNum.getText() + "1");
-                    lastOp="number";
-                }
-                else{
-                    currNumReload("1");
-                }
-            }
-        });
-
-        twoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(lastOp.equals("number") || lastOp.equals("point") || lastOp.equals("minus")) {
-                    currNum.setText(currNum.getText() + "2");
-                    lastOp="number";
-                }
-                else{
-                    currNumReload("2");
-                }
-            }
-        });
-
-        threeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(lastOp.equals("number") || lastOp.equals("point") || lastOp.equals("minus")) {
-                    currNum.setText(currNum.getText() + "3");
-                    lastOp="number";
-                }
-                else{
-                    currNumReload("3");
-                }
-            }
-        });
-
-        fourBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(lastOp.equals("number") || lastOp.equals("point") || lastOp.equals("minus")) {
-                    currNum.setText(currNum.getText() + "4");
-                    lastOp="number";
-                }
-                else{
-                    currNumReload("4");
-                }
-            }
-        });
-
-        fiveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(lastOp.equals("number") || lastOp.equals("point") || lastOp.equals("minus")) {
-                    currNum.setText(currNum.getText() + "5");
-                    lastOp="number";
-                }
-                else{
-                    currNumReload("5");
-                }
-            }
-        });
-
-        sixBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(lastOp.equals("number") || lastOp.equals("point") || lastOp.equals("minus")) {
-                    currNum.setText(currNum.getText() + "6");
-                    lastOp="number";
-                }
-                else{
-                    currNumReload("6");
-                }
-            }
-        });
-
-        sevenBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(lastOp.equals("number") || lastOp.equals("point") || lastOp.equals("minus")) {
-                    currNum.setText(currNum.getText() + "7");
-                    lastOp="number";
-                }
-                else{
-                    currNumReload("7");
-                }
-            }
-        });
-
-        eightBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(lastOp.equals("number") || lastOp.equals("point") || lastOp.equals("minus")) {
-                    currNum.setText(currNum.getText() + "8");
-                    lastOp="number";
-                }
-                else{
-                    currNumReload("8");
-                }
-            }
-        });
-
-        nineBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(lastOp.equals("number") || lastOp.equals("point") || lastOp.equals("minus")) {
-                    currNum.setText(currNum.getText() + "9");
-                    lastOp="number";
-                }
-                else{
-                    currNumReload("9");
-                }
-            }
-        });
+            });
+        }
     }
 
     private void operationListener() {
@@ -474,16 +353,8 @@ public class MainActivity extends AppCompatActivity {
              case "/":
                  String divRes = String.valueOf(Double.parseDouble(currRes.getText().toString())
                          /Double.parseDouble(currNum.getText().toString()));
-                 //if(!divRes.equals("Infinity") && !divRes.equals("NaN")) {
                      currRes.setText(divRes);
                      currNum.setText("0");
-                 /*}
-                 else {
-                     currRes.setText("");
-                     currNum.setText("error: dividing by 0");
-                     opChar.setText("=");
-                     lastOp="error";
-                 }*/
                  break;
              case "^":
                  currRes.setText(String.valueOf(Math.pow(Double.parseDouble(currRes.getText().toString()),
